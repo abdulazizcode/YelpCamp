@@ -3,6 +3,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const Campground = require("./models/campground");
+const engine = require("ejs-mate");
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp", {
     useNewUrlParser: true,
@@ -18,6 +19,8 @@ db.once("open", () => {
 
 const app = express();
 
+// use ejs-locals for all ejs templates:
+app.engine("ejs", engine);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
